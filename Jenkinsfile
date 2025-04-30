@@ -1,15 +1,28 @@
 pipeline {
     agent any
     stages {
-        stage('Clone') {
+        stage('Clean Workspace') {
             steps {
-                echo "Cloning repo..."
-                checkout scm
+                cleanWs()  // Optional but recommended
+            }
+        }
+        stage('Clone Repo') {
+            steps {
+                script {
+                    try {
+                        checkout scm
+                        sh 'git branch -v'  // Debug: Verify repo was cloned
+                    } catch (err) {
+                        echo "Failed to clone repo: ${err}"
+                        currentBuild.result = 'FAILURE'
+                        error("Git checkout failed")
+                    }
+                }
             }
         }
         stage('Build') {
             steps {
-                echo "Building project..."
+                echo "Building..."
             }
         }
         stage('Test') {
