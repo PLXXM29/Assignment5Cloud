@@ -15,6 +15,7 @@ function App() {
           <p className="label">Submitted by:</p>
           <p>Chanyanat Sodsri — B6508852</p>
           <p>Kamonchanok Thonnondang — B6526405</p>
+          
         </div>
       </div>
     </div>
