@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'node16' // ชื่อที่คุณตั้งไว้ตอนติดตั้ง NodeJS ใน Global Tool Config
+        nodejs 'node16'  // ต้องตรงกับชื่อ NodeJS ใน Jenkins tools
     }
 
     environment {
@@ -19,22 +19,28 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo "Installing node modules..."
-                sh 'npm install'
+                dir('my-app') {
+                    echo "Installing node modules..."
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                echo "Building project..."
-                sh 'npm run build'
+                dir('my-app') {
+                    echo "Building project..."
+                    sh 'npx vite build'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "Deploying to Firebase..."
-                sh 'npm run deploy'
+                dir('my-app') {
+                    echo "Deploying to Firebase....."
+                    sh 'npx firebase deploy --only hosting --token=$FIREBASE_TOKEN'
+                }
             }
         }
     }
