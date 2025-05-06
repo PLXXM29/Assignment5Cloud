@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'node16' // ชื่อที่คุณตั้งไว้ตอนติดตั้ง NodeJS ใน Global Tool Config
+    }
+
     environment {
         FIREBASE_TOKEN = credentials('firebase-token')
     }
