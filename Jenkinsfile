@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'node16'  // ต้องตรงกับชื่อ NodeJS ใน Jenkins tools
+        nodejs 'node20'  // ต้องตรงกับชื่อ NodeJS ใน Jenkins tools
     }
 
     environment {
