@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "firebase-tools": "^14.2.2"
+  },
+  "scripts": {
+    "deploy": "npx firebase deploy --token=$FIREBASE_TOKEN"
   }
 }
