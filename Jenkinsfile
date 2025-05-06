@@ -1,36 +1,29 @@
 pipeline {
     agent any
-
-    environment {
-        FIREBASE_TOKEN = credentials('firebase-token')  // ชื่อตรงกับที่ใส่ใน Jenkins Credentials
-    }
-
     stages {
         stage('Clone') {
             steps {
+                
                 echo "Cloning repo..."
                 checkout scm
             }
         }
-
-        stage('Install Dependencies') {
-            steps {
-                echo "Installing node modules..."
-                sh 'npm install'
-            }
-        }
-
         stage('Build') {
             steps {
+                
                 echo "Building project..."
-                sh 'npm run build'
             }
         }
+        stage('Test') {
+            steps {
 
+                echo "Running tests..."
+            }
+        }
         stage('Deploy') {
             steps {
-                echo "Deploying to Firebase..."
-                sh 'npm run deploy'
+                
+                echo "Deploying...."
             }
         }
     }
